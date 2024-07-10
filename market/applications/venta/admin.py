@@ -6,6 +6,7 @@ from .models import Sale, SaleDetail, CarShop
 
 class SaleAdmin(admin.ModelAdmin):
     list_display = (
+        'id',
         'date_sale',
         'count',
         'amount',
@@ -22,6 +23,7 @@ admin.site.register(Sale, SaleAdmin)
 
 class SaleDetailAdmin(admin.ModelAdmin):
     list_display = (
+        'id',
         'product',
         'sale',
         'count',
@@ -37,6 +39,7 @@ admin.site.register(SaleDetail, SaleDetailAdmin)
 
 class CarShopAdmin(admin.ModelAdmin):
     list_display = (
+        'id',
         'barcode',
         'product',
         'count',
