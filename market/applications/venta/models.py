@@ -6,7 +6,7 @@ from django.conf import settings
 #
 from applications.producto.models import Product
 #
-from .managers import CarritoComprasManager
+from .managers import CarritoComprasManager, SaleDetailManager
 # Create your models here.
 
 
@@ -69,6 +69,7 @@ class SaleDetail(TimeStampedModel):
     tax = models.PositiveIntegerField('Impuesto', default=19)
     anulate = models.BooleanField(default=False)
 
+    objects = SaleDetailManager()
 
     class Meta:
         verbose_name = 'Producto Vendido'

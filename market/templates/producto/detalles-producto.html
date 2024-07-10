@@ -1,0 +1,52 @@
+{% extends 'producto/base_producto.html' %}
+
+{% load static %}
+
+{% block panel-content %}
+
+
+<div class="grid-x container" style="text-align:center;">    
+    <div class="card" style="width: 300px; ">
+        <div class="cell card-divider">
+            <h4 class="cell">Detalle del producto</h4>
+        </div>
+        
+        <div class="card-section">
+            <h5>Codigo Barras: <b>{{producto.barcode}}</b></h5>
+            <h5>Producto: <b>{{producto.name}}</b></h5>
+            <h5>Fecha Vencimiento: <b>{{producto.due_date}}</b></h5>
+            <h5>Precio de Venta: <b>{{producto.sale_price}}</b></h5>
+            <h5>Cantidad en Stock: <b>{{producto.count}}</b></h5>
+            <h5>Cantidad de Ventas: <b>{{producto.num_sale}}</b></h5>
+
+            
+            <p>Tabla con las ventas de este producto*</p>
+        </div>
+    </div>
+
+    <div class="cell grid-x">
+        <table>
+            <thead>
+                <tr>
+                    <th>Cod.Barras</th>
+                    <th>Producto</th>
+                    <th>Fecha Venta</th>
+                    <th>Cantidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for venta in venta_producto %}
+                <tr>
+                    <td>{{venta.product.barcode}}</td>
+                    <td>{{venta.product.name}}</td>
+                    <td>{{venta.sale.date_sale}}</td>
+                    <td>{{venta.count}}</td>
+                </tr>
+                {% endfor %}              
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+{% endblock panel-content %}

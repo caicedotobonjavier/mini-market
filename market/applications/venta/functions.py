@@ -27,6 +27,7 @@ def crear_venta(self, **datos_venta):
         count = 0
         amount = 0
         lista_productos = []
+        list_stock = []
 
         #recorro los productos en el carrito y los guardo en la venta detalle
         for producto in carrito:
@@ -44,14 +45,19 @@ def crear_venta(self, **datos_venta):
             lista_productos.append(add)
 
             #cada vez que recorro el producto lo guardo en variable para actualiar el stock y la cantidad de veces vendido
-            producto_vendido = Product.objects.get(id=producto.product.id)
-            producto_vendido.count -= count
-            producto_vendido.num_sale += count
-            producto_vendido.save()
+            producto_vendido = producto.product
+            producto_vendido.count -= producto.count
+            producto_vendido.num_sale += producto.count
+            
+            list_stock.append(producto_vendido)
         
         #guardo todos los productos con su respectivo detalle
         SaleDetail.objects.bulk_create(
             lista_productos
+        )
+
+        Product.objects.bulk_update(
+            list_stock, ['count', 'num_sale']
         )
         
         #acutalizo la cantidad y el monto de la venta

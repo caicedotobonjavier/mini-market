@@ -60,8 +60,8 @@
                 <td>{{producto.count}}</td>
                 <td>{{producto.num_sale}}</td>
                 <td>
-                    <a href="#" class="button"><i class="fi-pencil"></i></a>
-                    <a href="#" class="button warning"><i class="fi-eye"></i></a>
+                    <a href="{% url 'producto_app:actualizar_producto' producto.id %}" class="button"><i class="fi-pencil"></i></a>
+                    <a href="{% url 'producto_app:detalle_producto' producto.id %}" class="button warning"><i class="fi-eye"></i></a>
                 </td>
             </tr>
             {% endfor %}

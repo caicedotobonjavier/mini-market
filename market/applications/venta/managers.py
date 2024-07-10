@@ -21,3 +21,17 @@ class CarritoComprasManager(models.Manager):
             return total['suma']
         else:
             return 0
+
+
+
+
+class SaleDetailManager(models.Manager):
+
+    def producto_veces_vendido(self, dato):
+        resultado = self.filter(
+            product__id = dato
+        )
+
+        print(resultado)
+
+        return resultado

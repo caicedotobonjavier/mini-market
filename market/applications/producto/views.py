@@ -2,9 +2,11 @@ from django.shortcuts import render
 #
 from .models import Product
 #
-from django.views.generic import TemplateView, CreateView, FormView
+from applications.venta.models import SaleDetail
 #
-from .forms import NuevoProductoForm
+from django.views.generic import TemplateView, CreateView, FormView, UpdateView, DetailView
+#
+from .forms import NuevoProductoForm, ActualizarProductoForm
 #
 from django.urls import reverse, reverse_lazy
 # Create your views here.
@@ -47,3 +49,28 @@ class RegistrarProductoView(FormView):
         
 
         return super(RegistrarProductoView, self).form_valid(form)
+
+
+
+class ActualizarProductoView(UpdateView):
+    template_name = 'producto/update-producto.html'
+    form_class = ActualizarProductoForm
+    model = Product
+
+    success_url = reverse_lazy('producto_app:productos')
+
+
+
+class DetallesDelProductoView(DetailView):
+    template_name = 'producto/detalles-producto.html'
+    model = Product
+    context_object_name = 'producto'
+
+
+    def get_context_data(self, **kwargs):
+        context = super(DetallesDelProductoView, self).get_context_data(**kwargs)
+
+        producto = self.kwargs['pk']
+        context["venta_producto"] = SaleDetail.objects.producto_veces_vendido(producto)
+        return context
+    
