@@ -9,7 +9,7 @@
 
     <div class="off-canvas position-left reveal-for-large" id="my-info" data-off-canvas data-position="left" style="background-color: #424242;">
       <div class="row column">
-        <h3 style="text-align: center; padding: 0.3em; color: #ffae00;">Market DJ</h3>
+        <h3 style="text-align: center; padding: 0.3em; color: #ffae00;">MiniMercado</h3>
         <ul class="vertical menu">
             <li>
               <a href="#"><span class="label warning">Almacen</span></a>
@@ -60,7 +60,7 @@
       <div class="grid-x">
         <div class="cell top-bar" style="background-color: #424242;">
           <div class="top-bar-left">
-            <h4 style="color: white;">Sesion de: {{ user.full_name }}</h4>
+            <h4 style="color: white;">Usuario : {{ user.full_name }}</h4>
           </div>
           <div class="top-bar-right">
             <a href="#">
@@ -71,6 +71,7 @@
       </div>
       <div class="grid-container" style="padding: 1em;">
         {% block panel-content %}
+
         {% endblock panel-content %}
       </div>
   </div>

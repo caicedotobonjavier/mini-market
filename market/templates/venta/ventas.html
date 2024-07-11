@@ -94,13 +94,13 @@
             </button>
         </form>
 
-        
 
-        <a href="#" class="cell hollow button alert">
-        <i class="fi-trash"></i>
-        <span>Limpiar Todo</span>
-        </a>
-    </div>
+        <form class="cell small-2" action="{% url 'venta_app:vaciar_carrito' %}" method="POST">{% csrf_token %}
+            <button type="submit" class="cell hollow button alert">
+                <i class="fi-trash"></i>
+            <span>Limpiar Todo</span>
+            </button>
+        </form>        
 
     </div>
 </div>

@@ -149,3 +149,17 @@ class FacturaView(View):
         pdf = factura_pdf('venta/factura.html', data)
 
         return HttpResponse(pdf, content_type='application/pdf')
+
+
+
+class EliminarProductosCarritoView(View):
+
+    def post(self, request, *args, **kwargs):
+        carrito = CarShop.objects.all()
+        carrito.delete()
+
+        return HttpResponseRedirect(
+            reverse(
+                'venta_app:venta'
+            )
+        )
