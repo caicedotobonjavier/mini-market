@@ -69,4 +69,4 @@ def crear_venta(self, **datos_venta):
         carrito.delete()
 
     else:
-        print('Carrito vacio') 
+        print('Carrito vacio')

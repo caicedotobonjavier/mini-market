@@ -6,15 +6,19 @@ from .models import Sale, SaleDetail, CarShop
 #
 from applications.producto.models import Product
 #
-from django.views.generic import TemplateView, FormView, View
+from django.views.generic import TemplateView, FormView, View, ListView
 #
 from .forms import CarritoComprasForm
 #
 from django.urls import reverse_lazy, reverse
 #
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 #
 from .functions import crear_venta
+#
+from .utils import factura_pdf
+#
+from django.db.models import Sum
 # Create your views here.
 
 
@@ -100,3 +104,48 @@ class RealizarCompraView(View):
                 'venta_app:venta'
             )
         )
+
+
+#para ver esto en pdf se debe instalar xhtml2pdf, este paquete nos sirve para covertir un html en pdf
+class ListaCarritoCompras(ListView):
+    template_name = 'venta/lista-compras.html'
+    model = CarShop
+    context_object_name = 'productos'
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["total_pagar"] = CarShop.objects.total_pagar()
+        return context
+
+
+
+#vista para generar la factura
+class FacturaView(View):
+
+    def post(self, request, *args, **kwargs):
+
+        #productos para enviar a el template de factura
+        productos = CarShop.objects.all()
+
+        #cantidad de productos para enviar a el template de factura
+        cantidad = CarShop.objects.all().aggregate(
+            suma = Sum('count')
+        )
+
+        #total a pagar
+        total_pagar = CarShop.objects.total_pagar()
+
+
+        print(cantidad)
+
+        data = {
+            'productos' : productos,
+            'cantidad' : cantidad,
+            'total_pagar' : total_pagar,
+        }
+
+        pdf = factura_pdf('venta/factura.html', data)
+
+        return HttpResponse(pdf, content_type='application/pdf')

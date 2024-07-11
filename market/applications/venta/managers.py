@@ -6,7 +6,7 @@ from django.db.models import F, Sum, IntegerField
 class CarritoComprasManager(models.Manager):
 
     def productos_carrito(self):
-        return self.all()
+        return self.all().order_by('barcode')
 
 
     def total_pagar(self):

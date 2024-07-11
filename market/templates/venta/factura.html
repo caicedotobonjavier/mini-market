@@ -1,0 +1,20 @@
+
+<div style="text-align:center;">
+
+    <h1>Supermercado Javier Caicedo Tobon</h1>
+    NIT.1035388785 <br>
+    Cisneros Antioquia <br>
+    Calle 11 # 08 - 43 <br>
+    <b>------------------------------</b> <br>
+
+    {% for producto in productos%}        
+            Producto : {{producto.product.name}} <br>
+            Cantidad : {{producto.count}} <br>
+            Precio : {{producto.product.sale_price}} <br>
+            ------------------------------ <br>          
+    {% endfor %}
+
+    <p><b>Cantidad productos : </b>{{cantidad.suma}}</p>
+    <p><b>Total a pagar : </b>{{total_pagar}}</p>
+
+</div>

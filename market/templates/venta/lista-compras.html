@@ -1,0 +1,15 @@
+<h1>Productos Carrito Compras</h1>
+
+<ul>
+    {% for producto in productos%}
+        <li>
+            <b>* {{producto.product.name}}</b>
+            <p><b>Cantidad:</b> {{producto.count}}</p>
+            <p><b>Precio:</b> {{producto.product.sale_price}}</p>
+        </li>
+    {% endfor %}
+</ul>
+
+<p><b>----------------------------------------</b></p>
+<p><b>Cantidad productos : </b>{{productos.count}}</p>
+<p><b>Total a pagar : </b>{{total_pagar}}</p>
