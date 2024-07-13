@@ -63,9 +63,9 @@
             <h4 style="color: white;">Usuario : {{ user.full_name }}</h4>
           </div>
           <div class="top-bar-right">
-            <a href="#">
-              <span class="label warning">Salir</span>
-            </a>
+            <form action="{% url 'usuarios_app:logout' %}" method="POST">{% csrf_token %}
+              <button type="submit" class="label warning">Salir</button>
+            </form>
           </div>
         </div>
       </div>

@@ -1,0 +1,27 @@
+{% extends 'user/base_users.html' %}
+
+{% load static %}
+
+{% block panel-content %}
+
+
+<div class="grid-x grid-margin-x align-center">
+
+    <h1 class='cell' style="text-align:center;" >REGISTRAR NUEVO USUARIO</h1>
+
+    <div class="cell large-6">
+        <form method="POST">{% csrf_token %}
+            {{form.as_p}}
+
+            <div class="cell medium-6" style="text-align:center;">
+                <button type="submit" class="success button">Guardar</button>
+            </div>
+
+
+        </form>
+        
+    </div>
+
+</div>
+
+{% endblock panel-content %}
